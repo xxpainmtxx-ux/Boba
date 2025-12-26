@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Booba - Tienda Premium</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🧋 Catálogo Booba</h1>
+            <p class="tagline">Deliciosas bebidas con perlas de tapioca, frapes y batidos</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar productos...">
+            </div>
+            
+            <div class="filters">
+                <select id="categoryFilter">
+                    <option value="all">Todas las categorías</option>
+                    <option value="te">Té con Boba</option>
+                    <option value="frappe">Frappé</option>
+                    <option value="batido">Batido</option>
+                    <option value="refresco">Refresco</option>
+                    <option value="smoothie">Smoothie</option>
+                </select>
+                
+                <select id="priceFilter">
+                    <option value="all">Todos los precios</option>
+                    <option value="0-5">$0 - $5</option>
+                    <option value="5-8">$5 - $8</option>
+                    <option value="8-12">$8 - $12</option>
+                    <option value="12+">$12+</option>
+                </select>
+                
+                <button id="resetFilters" class="btn-reset">Limpiar filtros</button>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Los productos se cargarán dinámicamente con JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal para detalles del producto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalProductContent"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Catálogo Booba. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
