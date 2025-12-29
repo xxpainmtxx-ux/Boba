@@ -1,53 +1,456 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Booba - Tienda Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Catálogo Booba - SPA</title> 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
 </head>
 <body>
-    <header>
+    <!-- HEADER GLOBAL (NODO RAÍZ DEL ÁRBOL DE NAVEGACIÓN) -->
+    <nav class="navbar">
         <div class="container">
-            <h1>🧋 Catálogo Booba</h1>
-            <p class="tagline">Deliciosas bebidas con perlas de tapioca, frapes y batidos</p>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Buscar productos...">
-            </div>
-            
-            <div class="filters">
-                <select id="categoryFilter">
-                    <option value="all">Todas las categorías</option>
-                    <option value="te">Té con Boba</option>
-                    <option value="frappe">Frappé</option>
-                    <option value="batido">Batido</option>
-                    <option value="refresco">Refresco</option>
-                    <option value="smoothie">Smoothie</option>
-                </select>
+            <div class="nav-content">
+                <!-- Logo clickeable: actúa como nodo que lleva a la vista "Sobre nosotros" -->
+                <a href="#sobre" class="logo" data-view="view-sobre">
+                    <span class="logo-icon">🧋</span>
+                    <span class="logo-text">Booba</span>
+                </a>
                 
-                <select id="priceFilter">
-                    <option value="all">Todos los precios</option>
-                    <option value="0-5">$0 - $5</option>
-                    <option value="5-8">$5 - $8</option>
-                    <option value="8-12">$8 - $12</option>
-                    <option value="12+">$12+</option>
-                </select>
+                <!-- Botón de menú móvil (hamburguesa) -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
                 
-                <button id="resetFilters" class="btn-reset">Limpiar filtros</button>
+                <!-- Menú de navegación: cada enlace representa un nodo hijo del árbol principal -->
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#inicio" class="nav-link active" data-view="view-inicio">Inicio</a></li>
+                    <li><a href="#servicios" class="nav-link" data-view="view-servicios">Servicios</a></li>
+                    <li><a href="#productos" class="nav-link" data-view="view-productos">Productos</a></li>
+                    <li><a href="#contacto" class="nav-link" data-view="view-contacto">Contacto</a></li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <div class="products-grid" id="productsGrid">
-            <!-- Los productos se cargarán dinámicamente con JavaScript -->
-        </div>
+    <!-- MAIN ROOT: CONTENEDOR PRINCIPAL DE VISTAS (SEMI ÁRBOL DE SECCIONES) -->
+    <main class="container" id="appRoot">
+        <!-- VISTA: INICIO -->
+        <section id="view-inicio" class="view-section is-active">
+            <!-- Hero Section - Sección principal de bienvenida -->
+            <header class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title">🧋 Booba</h1>
+                        <p class="hero-tagline">Deliciosas bebidas con perlas de tapioca, frapes y batidos</p>
+                        <!-- Botón que navega al nodo de productos dentro del mismo árbol -->
+                        <a href="#productos" class="btn-hero" data-view="view-productos">Explorar Productos</a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Sección de productos populares -->
+            <section class="popular-section">
+                <h2 class="section-title">⭐ Productos Populares</h2>
+                <div class="products-grid" id="popularProducts">
+                    <!-- Los productos populares se cargarán dinámicamente con JavaScript -->
+                </div>
+            </section>
+
+            <!-- Sección de comentarios/testimonios -->
+            <section class="testimonials-section">
+                <h2 class="section-title">💬 Lo que dicen nuestros clientes</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Las mejores bebidas boba de la ciudad. El sabor es increíble y la atención al cliente es excelente."</p>
+                        <p class="testimonial-author">- María González</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"Me encanta venir aquí todos los días. Sus bebidas son únicas y siempre tienen nuevas opciones."</p>
+                        <p class="testimonial-author">- Carlos Ramírez</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p class="testimonial-text">"La calidad de los ingredientes se nota en cada sorbo. Definitivamente mi lugar favorito para boba."</p>
+                        <p class="testimonial-author">- Ana Martínez</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de características del negocio -->
+            <section class="features-section">
+                <h2 class="section-title">✨ ¿Por qué elegirnos?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌱</div>
+                        <h3>Ingredientes Naturales</h3>
+                        <p>Utilizamos solo ingredientes frescos y naturales en todas nuestras bebidas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Preparación Rápida</h3>
+                        <p>Nuestras bebidas se preparan al momento para garantizar la frescura.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Variedad de Sabores</h3>
+                        <p>Amplia selección de sabores para todos los gustos y preferencias.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💝</div>
+                        <h3>Atención Personalizada</h3>
+                        <p>Nos preocupamos por brindarte la mejor experiencia en cada visita.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- VISTA: PRODUCTOS -->
+        <section id="view-productos" class="view-section">
+            <header class="page-header">
+                <div class="container">
+                    <h1>🍹 Catálogo Boba</h1>
+                    <p class="tagline">Descubre nuestra amplia variedad de bebidas boba</p>
+                </div>
+            </header>
+
+            <!-- Controles de búsqueda y filtros -->
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Buscar productos...">
+                </div>
+                
+                <div class="filters">
+                    <select id="categoryFilter">
+                        <option value="all">Todas las categorías</option>
+                        <option value="clasicos">Boba Clásicos</option>
+                        <option value="leche">Con Leche</option>
+                        <option value="alcohol">Con Alcohol</option>
+                    </select>
+                    
+                    <select id="priceFilter">
+                        <option value="all">Todos los precios</option>
+                        <option value="0-5">0 - 35 Bs</option>
+                        <option value="5-8">35 - 55 Bs</option>
+                        <option value="8-12">55 - 85 Bs</option>
+                        <option value="12+">85+ Bs</option>
+                    </select>
+                    
+                    <button id="resetFilters" class="btn-reset">Limpiar filtros</button>
+                </div>
+            </div>
+
+            <!-- Grid de productos -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se cargarán dinámicamente con JavaScript -->
+            </div>
+        </section>
+
+        <!-- VISTA: SERVICIOS -->
+        <section id="view-servicios" class="view-section">
+            <header class="page-header">
+                <div class="container">
+                    <h1>🛎️ Nuestros Servicios</h1>
+                    <p class="tagline">Todo lo que ofrecemos para hacer tu experiencia única</p>
+                </div>
+            </header>
+
+            <!-- Sección de servicios principales -->
+            <section class="services-section">
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">🚚</div>
+                        <h3>Delivery a Domicilio</h3>
+                        <p>Llevamos tus bebidas favoritas hasta la puerta de tu casa. Servicio rápido y confiable en toda la ciudad.</p>
+                        <ul class="service-features">
+                            <li>Entrega en menos de 30 minutos</li>
+                            <li>Cobertura en toda la zona metropolitana</li>
+                            <li>Pedidos mínimos desde $15</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🎉</div>
+                        <h3>Eventos y Catering</h3>
+                        <p>Hacemos que tus eventos sean inolvidables con nuestro servicio de catering especializado en bebidas boba.</p>
+                        <ul class="service-features">
+                            <li>Barra de bebidas personalizada</li>
+                            <li>Opciones para grupos grandes</li>
+                            <li>Personalización de sabores</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🎁</div>
+                        <h3>Programa de Fidelidad</h3>
+                        <p>Acumula puntos con cada compra y canjéalos por bebidas gratis, descuentos y productos exclusivos.</p>
+                        <ul class="service-features">
+                            <li>1 punto por cada dólar gastado</li>
+                            <li>Bebida gratis cada 10 compras</li>
+                            <li>Descuentos exclusivos para miembros</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">🎨</div>
+                        <h3>Bebidas Personalizadas</h3>
+                        <p>Crea tu propia bebida única eligiendo entre nuestros ingredientes premium y sabores especiales.</p>
+                        <ul class="service-features">
+                            <li>Más de 20 sabores base</li>
+                            <li>Múltiples opciones de toppings</li>
+                            <li>Niveles de dulzor personalizables</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h3>Pedidos Online</h3>
+                        <p>Realiza tus pedidos desde la comodidad de tu dispositivo móvil con nuestra plataforma fácil de usar.</p>
+                        <ul class="service-features">
+                            <li>App móvil disponible</li>
+                            <li>Pago seguro en línea</li>
+                            <li>Seguimiento de pedidos en tiempo real</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">👥</div>
+                        <h3>Grupos y Reservas</h3>
+                        <p>Organiza reuniones con amigos o colegas en nuestro espacio acogedor. Reserva tu mesa con anticipación.</p>
+                        <ul class="service-features">
+                            <li>Espacios para grupos de hasta 20 personas</li>
+                            <li>Reservas con 24 horas de anticipación</li>
+                            <li>Menús especiales para grupos</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de horarios -->
+            <section class="hours-section">
+                <h2 class="section-title">🕐 Horarios de Atención</h2>
+                <div class="hours-card">
+                    <div class="hours-item">
+                        <span class="day">Lunes - Viernes</span>
+                        <span class="time">9:00 AM - 10:00 PM</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Sábados</span>
+                        <span class="time">10:00 AM - 11:00 PM</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="day">Domingos</span>
+                        <span class="time">11:00 AM - 9:00 PM</span>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- VISTA: CONTACTO -->
+        <section id="view-contacto" class="view-section">
+            <header class="page-header">
+                <div class="container">
+                    <h1>📞 Contáctanos</h1>
+                    <p class="tagline">Estamos aquí para ayudarte. ¡Escríbenos!</p>
+                </div>
+            </header>
+
+            <div class="contact-wrapper">
+                <!-- Formulario de contacto -->
+                <section class="contact-form-section">
+                    <h2 class="section-title">Envíanos un mensaje</h2>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Teléfono (opcional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Selecciona un asunto</option>
+                                <option value="pedido">Consulta sobre pedido</option>
+                                <option value="servicio">Información de servicios</option>
+                                <option value="evento">Catering para eventos</option>
+                                <option value="sugerencia">Sugerencia o comentario</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+                    </form>
+                </section>
+
+                <!-- Información de contacto -->
+                <section class="contact-info-section">
+                    <h2 class="section-title">Información de contacto</h2>
+                    
+                    <div class="contact-info-card">
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <h3>Dirección</h3>
+                                <p>123 Calle Principal<br>Ciudad, Estado 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">📞</div>
+                            <div class="info-content">
+                                <h3>Teléfono</h3>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">✉️</div>
+                            <div class="info-content">
+                                <h3>Email</h3>
+                                <p>info@catalogobooba.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">🕐</div>
+                            <div class="info-content">
+                                <h3>Horarios</h3>
+                                <p>Lun-Vie: 9:00 AM - 10:00 PM<br>
+                                   Sáb: 10:00 AM - 11:00 PM<br>
+                                   Dom: 11:00 AM - 9:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Redes sociales -->
+                    <div class="social-media">
+                        <h3>Síguenos en redes sociales</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link">📘 Facebook</a>
+                            <a href="#" class="social-link">📷 Instagram</a>
+                            <a href="#" class="social-link">🐦 Twitter</a>
+                            <a href="#" class="social-link">📱 TikTok</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- VISTA: SOBRE NOSOTROS (DESTINO DEL LOGO) -->
+        <section id="view-sobre" class="view-section">
+            <header class="page-header">
+                <div class="container">
+                    <h1>🧋 Sobre Booba</h1>
+                    <p class="tagline">Conoce nuestra historia y pasión por las bebidas boba</p>
+                </div>
+            </header>
+
+            <!-- Sección de historia -->
+            <section class="about-section">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Nuestra Historia</h2>
+                        <p>Booba nació de la pasión por traer las mejores bebidas boba a nuestra comunidad. Fundada en 2020, comenzamos como un pequeño local con el sueño de compartir la auténtica experiencia del bubble tea con todos.</p>
+                        <p>Desde nuestros inicios, nos hemos comprometido a utilizar solo los ingredientes más frescos y de la más alta calidad. Cada bebida que preparamos es una obra de arte, cuidadosamente elaborada para brindarte una experiencia única en cada sorbo.</p>
+                        <p>Hoy en día, seguimos creciendo y expandiendo nuestro catálogo, pero nunca perdemos de vista nuestro objetivo principal: hacer que cada cliente se sienta especial y disfrute de bebidas deliciosas que los hagan sonreír.</p>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-placeholder">🧋</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de misión y valores -->
+            <section class="mission-section">
+                <h2 class="section-title">Nuestra Misión y Valores</h2>
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <h3>🎯 Misión</h3>
+                        <p>Proporcionar bebidas boba de la más alta calidad, utilizando ingredientes frescos y naturales, mientras creamos momentos memorables para nuestros clientes.</p>
+                    </div>
+                    <div class="mission-card">
+                        <h3>💎 Valores</h3>
+                        <ul>
+                            <li>Calidad en cada producto</li>
+                            <li>Compromiso con la frescura</li>
+                            <li>Atención al cliente excepcional</li>
+                            <li>Innovación constante</li>
+                            <li>Sostenibilidad y responsabilidad</li>
+                        </ul>
+                    </div>
+                    <div class="mission-card">
+                        <h3>🌟 Visión</h3>
+                        <p>Ser el destino preferido para los amantes del bubble tea, reconocidos por nuestra excelencia, creatividad y dedicación a crear experiencias únicas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección del equipo -->
+            <section class="team-section">
+                <h2 class="section-title">Nuestro Equipo</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">👨‍🍳</div>
+                        <h3>Carlos Chen</h3>
+                        <p class="team-role">Fundador y Barista Principal</p>
+                        <p class="team-bio">Con más de 10 años de experiencia en la industria del bubble tea, Carlos trae autenticidad y pasión a cada bebida.</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">👩‍🍳</div>
+                        <h3>María López</h3>
+                        <p class="team-role">Directora de Operaciones</p>
+                        <p class="team-bio">María asegura que cada aspecto de nuestra operación funcione perfectamente, desde la calidad hasta el servicio al cliente.</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">👨‍💼</div>
+                        <h3>David Kim</h3>
+                        <p class="team-role">Chef de Sabores</p>
+                        <p class="team-bio">David es el creativo detrás de nuestros nuevos sabores, siempre experimentando con combinaciones únicas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de logros -->
+            <section class="achievements-section">
+                <h2 class="section-title">Nuestros Logros</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-number">5000+</div>
+                        <div class="achievement-label">Clientes Satisfechos</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-number">50+</div>
+                        <div class="achievement-label">Sabores Únicos</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-number">5</div>
+                        <div class="achievement-label">Años de Experiencia</div>
+                    </div>
+                    <div class="achievement-card">
+                        <div class="achievement-number">100%</div>
+                        <div class="achievement-label">Ingredientes Naturales</div>
+                    </div>
+                </div>
+            </section>
+        </section>
     </main>
 
-    <!-- Modal para detalles del producto -->
+    <!-- Modal para detalles del producto (compartido por todas las vistas) -->
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -55,13 +458,38 @@
         </div>
     </div>
 
+    <!-- MENÚ DESPLEGABLE DE REDES SOCIALES (VISIBLES EN TODA LA PÁGINA) -->
+    <div class="redes-sociales-container">
+        <button class="social-main-btn" id="socialMainBtn" aria-label="Abrir redes sociales">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        <div class="redes-sociales" id="redesSociales">
+            <!-- Facebook -->
+            <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <!-- X (Twitter) -->
+            <a href="https://x.com" target="_blank" class="social-link" aria-label="X (Twitter)">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <!-- TikTok -->
+            <a href="https://tiktok.com" target="_blank" class="social-link" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- FOOTER GLOBAL (NODO HOJA DEL ÁRBOL PRINCIPAL) -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Catálogo Booba. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Catálogo Booba. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
